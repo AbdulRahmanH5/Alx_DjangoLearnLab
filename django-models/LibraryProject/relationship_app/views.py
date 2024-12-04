@@ -4,7 +4,7 @@ from .models import Book
 from .models import Library
 
 # Create your views here.
-def book_list(request):
+def list_books(request):
     books = Book.objects.all()    # fitch all books instance Book.
     context = {'book_list': books }  # create a context with book_list.
     return render(request, 'relationship_app/list_books.html', context)
