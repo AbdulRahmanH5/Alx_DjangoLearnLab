@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import DateDetailView
+from django.views.generic.detail import DateDetailView
 from .models import Book
 from .models import Library
 
