@@ -6,7 +6,7 @@ from .models import Book, Library
 def book_list(request):
     books = Book.objects.all()    # fitch all books instance Book.
     context = {'book_list': books }  # create a context with book_list.
-    return render(request, 'books/book_list.html', context)
+    return render(request, 'relationship_app/book_list.html', context)
 
 
 class LibraryDetailsView(DateDetailView):
