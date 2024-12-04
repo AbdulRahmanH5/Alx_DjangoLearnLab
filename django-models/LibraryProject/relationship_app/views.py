@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic.detail import DateDetailView
+from django.views.generic.detail import DetailView
 from .models import Book
 from .models import Library
 
@@ -10,7 +10,7 @@ def book_list(request):
     return render(request, 'relationship_app/list_books.html', context)
 
 
-class LibraryDetailsView(DateDetailView):
+class LibraryDetailsView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
     context_object_name = 'library'
