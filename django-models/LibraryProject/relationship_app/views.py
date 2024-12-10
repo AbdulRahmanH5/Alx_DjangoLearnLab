@@ -13,10 +13,10 @@ def register_view(request):
             return redirect('home')
         
         else:
-            form = UserCreationForm
+            form = UserCreationForm()
             
-        return render(request, 'registration/register.html', {'form': form})
+        return render(request, 'relationship_app/register.html', {'form': form})
     
 @login_required
 def profile_view(requets):
-    return render(requets, 'registration/profile.html')
+    return render(requets, 'relationship_app/profile.html')
