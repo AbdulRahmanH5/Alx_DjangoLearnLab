@@ -1,0 +1,16 @@
+<h1>Librarian Dashboard</h1>
+<div>
+    <h2>Book Management</h2>
+    <div>
+        <h3>Borrowed Books ({{ borrowed_books.count }})</h3>
+        <table>
+            {% for book in borrowed_books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.borrowed_by }}</td>
+                    <td><button>Return</button></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
