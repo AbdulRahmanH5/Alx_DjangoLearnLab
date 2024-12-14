@@ -16,6 +16,12 @@ class Book(models.Model):
     title = models.CharField(max_length=30)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
 
+    class Meta:
+        permissions = (
+            ("can_add_book","Can Add Books In This Library"),
+            ("can_change_book","Can Change this books in Library"),
+            ("can_delete_book","Can Delete Books In Library"),
+        )
     def __str__(self):
         return f"{self.title} by {self.author}"
     
@@ -39,11 +45,11 @@ class Librarian(models.Model):
 
 # Class UserProfile.
 class UserProfile(models.Model):
-    ROLES = (
+    ROLES =  [
         ('Admin', 'Admin'),
         ('Librarian', 'Librarian'),
         ('Member', 'Member')
-    )
+    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=100, choices=ROLES, null=True, blank=True)
 
