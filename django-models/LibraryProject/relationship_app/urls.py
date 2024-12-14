@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views 
 from .views import SignUpView, LogInView,LogOutView,profile_view
-from .views import admin_view, librarian_view, member_view,book_list, LibraryDetailView
+from .views import admin_view, librarian_view, member_view,book_list, LibraryDetailView, add_book, edit_book, delete_book
 
 urlpatterns = [
     # Task 1
@@ -14,10 +14,15 @@ urlpatterns = [
     path('logout/', LogOutView.as_view(), name='register'),
     path('profile/', profile_view, name='profile'),
     
-    #task 3
+    # Task 3
     path('admin_view/', admin_view, name='admin_view'),
     path('librarian/', librarian_view, name='librarian'),
     path('member/', member_view, name='member'),
+    
+    # Task 4
+    path('add_book/', add_book, name='add_book'),
+    path('edit_book/', edit_book, name='edit_book'),
+    path('delete_book/', delete_book, name='delete_book'),
 ]
 
 
