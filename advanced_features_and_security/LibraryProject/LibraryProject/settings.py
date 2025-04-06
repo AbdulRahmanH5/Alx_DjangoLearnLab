@@ -136,4 +136,4 @@ LOGIN_URL = 'login'
 
 
 # Custom User Model
-AUTH_USER_MODEL = 'relationship_app.CustomUserModel'
+AUTH_USER_MODEL = 'relationship_app.CustomUser'

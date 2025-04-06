@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import Book
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUserModel
+from .models import CustomUser
 class BookAdmin(admin.ModelAdmin):
     list_display = ('title', 'author', 'publication_year')
     search_fields = ('title', 'author')
@@ -11,7 +11,7 @@ admin.site.register(Book, BookAdmin)
 
 # Define the ModelAdmin class
 class CustomUserAdmin(UserAdmin):
-    model = CustomUserModel
+    model = CustomUser
     list_display = ('username', 'email', 'is_staff', 'date_of_birth', 'profile_photo')
     
     list_filter = ('is_staff', 'is_active', 'date_of_birth')
@@ -33,4 +33,4 @@ class CustomUserAdmin(UserAdmin):
     )
 
 # Register the CustomUserModel with the CustomUserAdmin
-admin.site.register(CustomUserModel, CustomUserAdmin)
+admin.site.register(CustomUser, CustomUserAdmin)
