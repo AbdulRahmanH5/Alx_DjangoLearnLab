@@ -9,12 +9,12 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
 from django.views.generic import TemplateView
 from .models import Book, Librarian, Author
-from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView
 from .models import Library
 from django.contrib.auth.decorators import permission_required
 from .forms import BookForm
+from django.conf import settings
 
 # Task 1
 def book_list(request):
@@ -58,7 +58,6 @@ def profile_view(requets):
 # Task 03
 from django.shortcuts import render
 from django.contrib.auth.decorators import user_passes_test
-from .models import Book, User
 
 def is_admin(user):
     return user.is_authenticated and getattr(user, 'role', None) == 'admin'
@@ -74,7 +73,7 @@ def is_member(user):
 def admin_view(request):
     context = {
         'books': Book.objects.all(),
-        'users': User.objects.all(),
+        'users': settings.AUTH_USER_MODEL.objects.all(),
         'total_books': Book.objects.count()
     }
     return render(request, 'relationship_app/admin_view.html', context)

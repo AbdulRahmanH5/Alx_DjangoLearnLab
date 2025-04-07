@@ -21,6 +21,7 @@ from relationship_app.views import HomeView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('R/', include('relationship_app.urls')),
+    path('', include('bookshelf.urls')),
     path('', include('django.contrib.auth.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('', HomeView.as_view(), name='home'),
