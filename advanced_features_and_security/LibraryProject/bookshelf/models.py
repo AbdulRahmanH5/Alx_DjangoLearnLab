@@ -34,3 +34,5 @@ class Book (models.Model):
             ('can_delete', 'Can delete book'),
             ('can_create', 'Can create book'),
         ]
+    def __str__(self):
+        return self.title
