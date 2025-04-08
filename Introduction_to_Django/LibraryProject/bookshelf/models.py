@@ -24,7 +24,7 @@ class CustomUser(AbstractUser):
     profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
 
 # Create your models here.
-class Book (models.Model):
+class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.CharField(max_length=100)
     publication_year = models.IntegerField()
@@ -40,20 +40,4 @@ class Book (models.Model):
         return self.title
     
 
-class Post(models.Model):
-    title = models.CharField(max_length=200)
-    content = models.TextField()
-    author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        permissions = [
-            ("can_view", "Can view posts"),
-            ("can_create", "Can create new posts"),
-            ("can_edit", "Can edit posts"),
-            ("can_delete", "Can delete posts"),
-        ]
