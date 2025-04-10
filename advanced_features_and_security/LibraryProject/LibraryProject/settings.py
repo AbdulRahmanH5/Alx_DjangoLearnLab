@@ -33,7 +33,7 @@ SECURE_BROOWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Enable only HTTPS Security for Cookies
+# Enable CSRF and Session Cookies to be Secure
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
