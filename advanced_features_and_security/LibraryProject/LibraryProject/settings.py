@@ -23,11 +23,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-wej0bbrtti+t%&!g_&z#7*myfkyj_)3meh*7o0cua2k!y8aw&a'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Desable Erorrs Deatils in Production invironment
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['abdulrahman.com', 'localhost']
 
+# Enable Secure Settings
+SECURE_BROOWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable only HTTPS Security for Cookies
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # Application definition
 
@@ -40,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'relationship_app',
     'bookshelf',
+    'csp',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +59,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'csp.middleware.CSPMiddleware',
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
@@ -137,3 +147,8 @@ LOGIN_URL = 'login'
 
 # Custom User Model
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
+
+# CSP Settings
+CSP_DEFAULT_SRC = ("'self'",) 
+CSP_SCRIPT_SRC = ("'self'", "https://trustedscripts.com")
+CSP_STYLE_SRC = ("'self'", "https://trustedstyles.com")
