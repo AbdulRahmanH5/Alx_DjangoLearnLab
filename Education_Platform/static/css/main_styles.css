@@ -211,14 +211,15 @@ img {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
-  background-color: var(--secondary-color);
-  border-radius: 4px;
+  right: 0; /* تغيير من left إلى right ليناسب RTL */
+  background-color: #fff;
+  border-radius: 8px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   min-width: 180px;
   padding: 0.5rem 0;
-  display: none;
-  z-index: 10;
+  margin-top: 0.5rem;
+  display: none; /* Initially hidden */
+  z-index: 100;
 }
 
 .dropdown-menu a {

@@ -9,6 +9,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <style>
         /* تعديل أنماط الشريط العلوي */
         .header-content {
@@ -126,6 +129,29 @@
         .dropdown-menu a:hover {
             background-color: #f5f5f5;
         }
+        
+        /* نموذج تسجيل الخروج */
+        .logout-form {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .logout-button {
+            background: none;
+            border: none;
+            width: 100%;
+            text-align: right;
+            padding: 0.75rem 1rem;
+            color: #333;
+            font-family: "Tajawal", sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .logout-button:hover {
+            background-color: #f5f5f5;
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -164,9 +190,13 @@
                                 {% endif %}
                             </div>
                             <div class="dropdown-menu">
-                                <a href="#">الملف الشخصي</a>
+                                <a href="{% url 'profile'%}">الملف الشخصي</a>
                                 <a href="#">لوحة التحكم</a>
-                                <a href="{% url 'logout' %}">تسجيل الخروج</a>
+                                <!-- استخدام نموذج POST لتسجيل الخروج -->
+                                <form method="post" action="{% url 'logout' %}" class="logout-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="logout-button">تسجيل الخروج</button>
+                                </form>
                             </div>
                         </div>
                     {% else %}
@@ -229,6 +259,26 @@
     </footer>
 
     <script src="{% static 'js/main.js' %}"></script>
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const userMenu = document.querySelector('.user-menu');
+        const dropdownMenu = document.querySelector('.dropdown-menu');
+
+        if (userMenu && dropdownMenu) {
+            userMenu.addEventListener('click', function(event) {
+                event.stopPropagation(); // Prevent the click from closing the menu immediately
+                dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+            });
+
+            document.addEventListener('click', function(event) {
+                if (!userMenu.contains(event.target)) {
+                    dropdownMenu.style.display = 'none';
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}
 </body>
 </html>

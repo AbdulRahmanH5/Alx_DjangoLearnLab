@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import User
+from .models import User, Profile
 
 class CustomUserCreationForm(UserCreationForm):
     username = forms.CharField(
@@ -44,3 +44,16 @@ class CustomAuthenticationForm(AuthenticationForm):
         label="كلمة المرور",
         widget=forms.PasswordInput
     )
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['full_name', 'bio', 'profile_picture']
+        labels = {
+            'full_name': 'الاسم الكامل',
+            'bio': 'نبذة شخصية',
+            'profile_picture': 'الصورة الشخصية',
+        }
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 4}),
+        }
