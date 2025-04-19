@@ -1,13 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
+from django.utils import timezone
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, ProfileUpdateForm
 from .models import Course, Lesson, Enrollment, User, Category, Comment, AdditionalResoursesUrl, CompletedLesson
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import UserChangeForm
 from .models import Profile
-from django.utils import timezone,  date
-from django.contrib.auth.decorators import login_required
 def signup_view(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -111,6 +110,12 @@ def update_profile(request):
         return redirect('profile')
     
     return render(request, 'core/update_profile.html')
+
+def about(requets):
+    templat_name = 'core/about.html'
+
+    return render(requets, templat_name)
+
 
 
 @login_required
