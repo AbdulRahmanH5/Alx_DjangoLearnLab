@@ -1,0 +1,17 @@
+<h1>Admin Dashboard</h1>
+<div>
+    <h2>System Statistics</h2>
+    <p>Total Books: {{ total_books }}</p>
+    <p>Total Users: {{ users.count }}</p>
+    
+    <h2>User Management</h2>
+    <table>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.role }}</td>
+                <td><button>Edit</button></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>

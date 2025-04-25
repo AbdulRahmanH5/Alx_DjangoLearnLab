@@ -1,0 +1,23 @@
+<h1>Member Dashboard</h1>
+<div>
+    <h2>My Borrowed Books</h2>
+    <table>
+        {% for book in borrowed_books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td>{{ book.due_date }}</td>
+                <td><button>Return</button></td>
+            </tr>
+        {% endfor %}
+    </table>
+    
+    <h2>Available Books</h2>
+    <table>
+        {% for book in available_books %}
+            <tr>
+                <td>{{ book.title }}</td>
+                <td><button>Borrow</button></td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
