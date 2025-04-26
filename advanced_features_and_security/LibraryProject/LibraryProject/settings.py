@@ -23,25 +23,35 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-wej0bbrtti+t%&!g_&z#7*myfkyj_)3meh*7o0cua2k!y8aw&a'
 
-# Desable Erorrs Deatils in Production invironment
+# Ensure DEBUG is set to False in production
 DEBUG = False
 
-ALLOWED_HOSTS = ['abdulrahman.com', 'localhost']
+ALLOWED_HOSTS = ['abdulrahman.com', 'WWWW.abdulrahman.com']
 
-# Enable Secure Settings
-SECURE_BROOWSER_XSS_FILTER = True
+# HTTP Setings
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
+# Browser-side protections
+SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
-# Enable CSRF and Session Cookies to be Secure
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# Content Security CSP
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_SCRIPT_SRC = ["'self'"]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
+CSP_IMG_SRC = ["'self'", "data:"]
 
 # Support for HTTPS Settings
 SECURE_SSL_REDIRECT = True
 SECURE_HSTS_SECONDS = 3600
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
+
 
 # Application definition
 
@@ -159,3 +169,4 @@ AUTH_USER_MODEL = 'bookshelf.CustomUser'
 CSP_DEFAULT_SRC = ("'self'",) 
 CSP_SCRIPT_SRC = ("'self'", "https://trustedscripts.com")
 CSP_STYLE_SRC = ("'self'", "https://trustedstyles.com")
+CSP_IMG_SRC = ("'self'", "data:")

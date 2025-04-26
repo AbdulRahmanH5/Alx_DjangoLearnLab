@@ -2,6 +2,7 @@ from django.shortcuts import render
 from.models import Book
 from django.contrib.auth.decorators import login_required, permission_required
 from .forms import BookForm
+from django.db.models import Q
 # Create your views here.
 
 
@@ -14,8 +15,8 @@ def book_list(request):
 @login_required
 @permission_required('bookshelf.can_view', raise_exception=True)
 def book_search(request):
-    query = request.GET.get('q')
-    books = Book.objects.filter(title__icontains=query)
+    query = request.GET.get('q', '').strip()
+    books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
     return render(request, 'bookshelf/book_list.html', {'books': books})
     
 @login_required
