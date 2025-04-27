@@ -23,19 +23,34 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-0ds61#_3uk%@=q@37672*3dydib+y-7=9ip9z&9!hp$03^v46)'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Ensure DEBUG is set to False in production
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['123.45.67.89']
 
-# Coke Session Security
+# HTTP Setings
+SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'Lax'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-# Clickjacking Protection
+
+# Browser-side protections
+SECURE_BROWSER_XSS_FILTER = True
 X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Content Security CSP
+CSP_DEFAULT_SRC = ["'self'"]
+CSP_SCRIPT_SRC = ["'self'"]
+CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
+CSP_IMG_SRC = ["'self'", "data:"]
+
+# إعدادات الأمان لدعم HTTPS
+SECURE_SSL_REDIRECT = True  # إعادة توجيه جميع طلبات HTTP إلى HTTPS
+SECURE_HSTS_SECONDS = 31536000  # فرض HTTPS لمدة سنة واحدة لتعزيز الأمان
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # تطبيق HSTS على النطاقات الفرعية
+SECURE_HSTS_PRELOAD = True  # السماح بتحميل الموقع مسبقًا في قوائم HSTS
 
 
 # Application definition
@@ -141,3 +156,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom user model
 AUTH_USER_MODEL = 'core.User'
+

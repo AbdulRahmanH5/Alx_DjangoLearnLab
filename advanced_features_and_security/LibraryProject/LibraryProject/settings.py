@@ -46,11 +46,11 @@ CSP_SCRIPT_SRC = ["'self'"]
 CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
 CSP_IMG_SRC = ["'self'", "data:"]
 
-# Support for HTTPS Settings
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = 3600
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+# إعدادات الأمان لدعم HTTPS
+SECURE_SSL_REDIRECT = True  # إعادة توجيه جميع طلبات HTTP إلى HTTPS
+SECURE_HSTS_SECONDS = 31536000  # فرض HTTPS لمدة سنة واحدة لتعزيز الأمان
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # تطبيق HSTS على النطاقات الفرعية
+SECURE_HSTS_PRELOAD = True  # السماح بتحميل الموقع مسبقًا في قوائم HSTS
 
 
 # Application definition
