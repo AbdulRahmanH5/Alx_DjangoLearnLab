@@ -26,32 +26,31 @@ SECRET_KEY = 'django-insecure-wej0bbrtti+t%&!g_&z#7*myfkyj_)3meh*7o0cua2k!y8aw&a
 # Ensure DEBUG is set to False in production
 DEBUG = False
 
-ALLOWED_HOSTS = ['abdulrahman.com', 'WWWW.abdulrahman.com']
+ALLOWED_HOSTS = ['192.168.1.100', 'localhost', '127.0.0.1']
 
-# HTTP Setings
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# Enforce HTTPS
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Recognize HTTPS requests behind a proxy
 
+# HTTP Strict Transport Security (HSTS)
+SECURE_HSTS_SECONDS = 31536000  # Enforce HTTPS for one year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow preloading in HSTS lists
 
-# Browser-side protections
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_CONTENT_TYPE_NOSNIFF = True
+# Secure cookies
+SESSION_COOKIE_SECURE = True  # Ensure session cookies are only sent over HTTPS
+CSRF_COOKIE_SECURE = True  # Ensure CSRF cookies are only sent over HTTPS
 
-# Content Security CSP
-CSP_DEFAULT_SRC = ["'self'"]
-CSP_SCRIPT_SRC = ["'self'"]
-CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
-CSP_IMG_SRC = ["'self'", "data:"]
+# Browser protections
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME-sniffing
+SECURE_BROWSER_XSS_FILTER = True  # Enable browser's XSS filtering
 
-# إعدادات الأمان لدعم HTTPS
-SECURE_SSL_REDIRECT = True  # إعادة توجيه جميع طلبات HTTP إلى HTTPS
-SECURE_HSTS_SECONDS = 31536000  # فرض HTTPS لمدة سنة واحدة لتعزيز الأمان
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # تطبيق HSTS على النطاقات الفرعية
-SECURE_HSTS_PRELOAD = True  # السماح بتحميل الموقع مسبقًا في قوائم HSTS
-
+# Content Security Policy (CSP)
+CSP_DEFAULT_SRC = ("'self'",)  # Restrict all content to the same origin
+CSP_SCRIPT_SRC = ("'self'", "https://trustedscripts.com")  # Allow scripts from trusted sources
+CSP_STYLE_SRC = ("'self'", "https://trustedstyles.com")  # Allow styles from trusted sources
+CSP_IMG_SRC = ("'self'", "data:")  # Allow images from trusted sources or inline data
 
 # Application definition
 
@@ -170,3 +169,23 @@ CSP_DEFAULT_SRC = ("'self'",)
 CSP_SCRIPT_SRC = ("'self'", "https://trustedscripts.com")
 CSP_STYLE_SRC = ("'self'", "https://trustedstyles.com")
 CSP_IMG_SRC = ("'self'", "data:")
+
+# Logging settings
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'error.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}

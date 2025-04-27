@@ -29,9 +29,9 @@ DEBUG = False
 ALLOWED_HOSTS = ['123.45.67.89']
 
 # HTTP Setings
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 
@@ -47,10 +47,10 @@ CSP_STYLE_SRC = ["'self'", "'unsafe-inline'"]
 CSP_IMG_SRC = ["'self'", "data:"]
 
 # إعدادات الأمان لدعم HTTPS
-SECURE_SSL_REDIRECT = True  # إعادة توجيه جميع طلبات HTTP إلى HTTPS
-SECURE_HSTS_SECONDS = 31536000  # فرض HTTPS لمدة سنة واحدة لتعزيز الأمان
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # تطبيق HSTS على النطاقات الفرعية
-SECURE_HSTS_PRELOAD = True  # السماح بتحميل الموقع مسبقًا في قوائم HSTS
+SECURE_SSL_REDIRECT = False  # إعادة توجيه جميع طلبات HTTP إلى HTTPS
+SECURE_HSTS_SECONDS = 0  # فرض HTTPS لمدة سنة واحدة لتعزيز الأمان
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False  # تطبيق HSTS على النطاقات الفرعية
+SECURE_HSTS_PRELOAD = False  # السماح بتحميل الموقع مسبقًا في قوائم HSTS
 
 
 # Application definition
